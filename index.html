@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Fantasy Feast – The ultimate fantasy community hub."/>
+  <title>Fantasy Feast – The Tavern of Imagination</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<canvas id="bgCanvas"></canvas>
+<div class="cursor-orb" id="cursorOrb"></div>
+<div class="page-veil" id="pageVeil"><div class="veil-rune">⚜</div></div>
+<div class="toast" id="toast"><span class="toast-icon" id="toastIcon"></span><div class="toast-body"><span class="toast-title" id="toastTitle"></span><span class="toast-msg" id="toastMsg"></span></div></div>
+
+<nav id="navbar">
+  <div class="nav-container">
+    <button class="nav-brand" onclick="App.go('home')"><span class="brand-emblem">⚜</span><span class="brand-name">Fantasy<em>Feast</em></span></button>
+    <ul class="nav-list" id="navList">
+      <li><button class="nav-link active" data-page="home"><span class="nl-icon">🏰</span><span class="nl-text">Tavern</span></button></li>
+      <li><button class="nav-link" data-page="games"><span class="nl-icon">⚔️</span><span class="nl-text">Games</span></button></li>
+      <li><button class="nav-link" data-page="realgames"><span class="nl-icon">🎮</span><span class="nl-text">Real Games</span></button></li>
+      <li><button class="nav-link" data-page="library"><span class="nl-icon">📚</span><span class="nl-text">Library</span></button></li>
+      <li><button class="nav-link" data-page="ideas"><span class="nl-icon">💡</span><span class="nl-text">Ideas</span></button></li>
+      <li><button class="nav-link" data-page="snacks"><span class="nl-icon">🍖</span><span class="nl-text">Snacks</span></button></li>
+      <li><button class="nav-link" data-page="beasts"><span class="nl-icon">🐾</span><span class="nl-text">Beast Club</span></button></li>
+      <li><button class="nav-link nav-guild" data-page="membership"><span class="nl-icon">⚜</span><span class="nl-text">Join Guild</span></button></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn" onclick="App.toggleSearch()" title="Search">🔍</button>
+      <div class="nav-user" id="navUser" style="display:none"><span class="user-avatar" id="navAvatar">?</span><span class="user-name" id="navUserName"></span></div>
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="search-bar" id="searchBar" style="display:none">
+    <div class="search-inner">
+      <span>🔍</span>
+      <input type="text" id="searchInput" placeholder="Search games, books, ideas…" autocomplete="off"/>
+      <button onclick="App.closeSearch()">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="mob-link" data-page="home">🏰 Tavern Home</button>
+    <button class="mob-link" data-page="games">⚔️ Adventure Games</button>
+    <button class="mob-link" data-page="realgames">🎮 Real Fantasy Games</button>
+    <button class="mob-link" data-page="library">📚 Library of Legends</button>
+    <button class="mob-link" data-page="ideas">💡 Ideas Chamber</button>
+    <button class="mob-link" data-page="snacks">🍖 Snack Tavern</button>
+    <button class="mob-link" data-page="beasts">🐾 Beast Club</button>
+    <button class="mob-link mob-guild" data-page="membership">⚜ Join the Guild</button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HOME -->
+<section class="page active" id="page-home">
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-wrap">
+    <div class="hero-crest">
+      <div class="crest-orbit o1"></div><div class="crest-orbit o2"></div><div class="crest-orbit o3"></div>
+      <div class="crest-core">⚜</div>
+    </div>
+    <span class="hero-eyebrow">✦ &nbsp; Est. The Age of Legends &nbsp; ✦</span>
+    <h1 class="hero-title"><span class="ht-top">Fantasy</span><span class="ht-bot">Feast</span></h1>
+    <p class="hero-tagline">The Tavern of Imagination</p>
+    <div class="ornament-bar"><span class="ob-line"></span><span class="ob-gems">◆ ◇ ◆</span><span class="ob-line"></span></div>
+    <p class="hero-desc">Welcome, Adventurer! Fantasy Feast is a magical community hub where <strong>gamers, readers, and creators</strong> gather to explore worlds of imagination. Pull up a chair — <em>your legend begins here.</em></p>
+    <div class="hero-cta">
+      <button class="btn btn-gold btn-xl" onclick="App.go('membership')">⚜ Join the Guild</button>
+      <button class="btn btn-ghost btn-xl" onclick="App.go('games')">⚔ Explore Games</button>
+    </div>
+    <div class="home-portal-heading"><span class="hp-line"></span><span class="hp-txt">What's Inside</span><span class="hp-line"></span></div>
+    <div class="portal-grid">
+      <button class="portal-card" onclick="App.go('games')"><span class="pc-icon">⚔️</span><span class="pc-name">Adventure Games</span><span class="pc-desc">Quest, puzzle &amp; strategy</span><span class="pc-arrow">→</span></button>
+      <button class="portal-card" onclick="App.go('realgames')"><span class="pc-icon">🎮</span><span class="pc-name">Real Games</span><span class="pc-desc">PC &amp; mobile titles</span><span class="pc-arrow">→</span></button>
+      <button class="portal-card" onclick="App.go('library')"><span class="pc-icon">📚</span><span class="pc-name">Library</span><span class="pc-desc">Fantasy books &amp; lore</span><span class="pc-arrow">→</span></button>
+      <button class="portal-card" onclick="App.go('ideas')"><span class="pc-icon">💡</span><span class="pc-name">Ideas Chamber</span><span class="pc-desc">Share your visions</span><span class="pc-arrow">→</span></button>
+      <button class="portal-card" onclick="App.go('snacks')"><span class="pc-icon">🍖</span><span class="pc-name">Snack Tavern</span><span class="pc-desc">Magical menu</span><span class="pc-arrow">→</span></button>
+      <button class="portal-card" onclick="App.go('beasts')"><span class="pc-icon">🐾</span><span class="pc-name">Beast Club</span><span class="pc-desc">Join your clan + get ID</span><span class="pc-arrow">→</span></button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item"><span class="hs-num" data-count="12480">0</span><span class="hs-lbl">Guild Members</span></div>
+      <span class="hs-sep">✦</span>
+      <div class="hs-item"><span class="hs-num">4</span><span class="hs-lbl">Beast Clans</span></div>
+      <span class="hs-sep">✦</span>
+      <div class="hs-item"><span class="hs-num">5</span><span class="hs-lbl">Real Games</span></div>
+      <span class="hs-sep">✦</span>
+      <div class="hs-item"><span class="hs-num" data-count="9420">0</span><span class="hs-lbl">Ideas Posted</span></div>
+    </div>
+    <div class="ticker-wrap"><span class="ticker-label">⚡ NEWS</span><div class="ticker-track" id="tickerTrack"><span>🐉 Dragon Clan hits 5,000 members milestone!</span><span>🎮 Elden Ring DLC now available!</span><span>📚 New book added to the Library!</span><span>⚜ New rank "Archmage" unlocked!</span><span>🍖 Frost Dragon Sorbet added to menu!</span></div></div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="page" id="page-games">
+  <div class="page-banner banner-games">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">⚔</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">⚔️</span><h2 class="pb-title">Adventure Zone</h2><p class="pb-sub">Choose your quest — only the bravest survive</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="action">⚔ Action</button>
+      <button class="filter-btn" data-filter="puzzle">🔮 Puzzle</button>
+      <button class="filter-btn" data-filter="strategy">🏰 Strategy</button>
+    </div>
+    <div class="cards-grid" id="gamesGrid">
+      <article class="game-card" data-category="action" data-theme="dragon">
+        <div class="gc-glow"></div>
+        <div class="gc-image img-dragon"><div class="gc-emoji">🐉</div><div class="gc-flare flare-ember"></div><div class="gc-badge badge-hot">🔥 HOT</div></div>
+        <div class="gc-body">
+          <div class="gc-meta-top"><span class="gc-rating">★★★★★</span><span class="gc-players">👥 4,821</span></div>
+          <h3 class="gc-title">Dragon Slayer Quest</h3>
+          <p class="gc-desc">Venture into scorched mountains to face the ancient dragon. Brutal action-adventure for the fearless warrior.</p>
+          <div class="gc-tags"><span class="tag">Action</span><span class="tag">RPG</span></div>
+          <button class="btn btn-ember btn-full" onclick="App.toast('⚔','Entering Dragon Slayer Quest…')">⚔ Play Now</button>
+        </div>
+      </article>
+      <article class="game-card" data-category="action" data-theme="dungeon">
+        <div class="gc-glow"></div>
+        <div class="gc-image img-dungeon"><div class="gc-emoji">🗝️</div><div class="gc-flare flare-blue"></div><div class="gc-badge badge-new">✨ NEW</div></div>
+        <div class="gc-body">
+          <div class="gc-meta-top"><span class="gc-rating">★★★★☆</span><span class="gc-players">👥 2,344</span></div>
+          <h3 class="gc-title">Dungeon Escape</h3>
+          <p class="gc-desc">The cursed labyrinth shifts with every step. Navigate deadly traps and shadow monsters to find the exit.</p>
+          <div class="gc-tags"><span class="tag">Action</span><span class="tag">Horror</span></div>
+          <button class="btn btn-magic btn-full" onclick="App.toast('🗝','Loading Dungeon Escape…')">⚔ Play Now</button>
+        </div>
+      </article>
+      <article class="game-card" data-category="puzzle" data-theme="wizard">
+        <div class="gc-glow"></div>
+        <div class="gc-image img-wizard"><div class="gc-emoji">🔮</div><div class="gc-flare flare-purple"></div><div class="gc-badge badge-pop">⭐ POPULAR</div></div>
+        <div class="gc-body">
+          <div class="gc-meta-top"><span class="gc-rating">★★★★★</span><span class="gc-players">👥 6,102</span></div>
+          <h3 class="gc-title">Wizard Puzzle</h3>
+          <p class="gc-desc">Decode ancient rune sequences and brew impossible potions in the arcane tower of mysteries.</p>
+          <div class="gc-tags"><span class="tag">Puzzle</span><span class="tag">Magic</span></div>
+          <button class="btn btn-purple btn-full" onclick="App.toast('🔮','Entering Wizard Puzzle…')">⚔ Play Now</button>
+        </div>
+      </article>
+      <article class="game-card" data-category="strategy" data-theme="kingdom">
+        <div class="gc-glow"></div>
+        <div class="gc-image img-kingdom"><div class="gc-emoji">🏰</div><div class="gc-flare flare-gold"></div><div class="gc-badge badge-epic">💎 EPIC</div></div>
+        <div class="gc-body">
+          <div class="gc-meta-top"><span class="gc-rating">★★★★★</span><span class="gc-players">👥 8,975</span></div>
+          <h3 class="gc-title">Mystic Kingdom</h3>
+          <p class="gc-desc">Build your realm, forge alliances, and conquer rival kingdoms in this grand epic strategy saga.</p>
+          <div class="gc-tags"><span class="tag">Strategy</span><span class="tag">Epic</span></div>
+          <button class="btn btn-gold btn-full" onclick="App.toast('🏰','Launching Mystic Kingdom…')">⚔ Play Now</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- REAL GAMES -->
+<section class="page" id="page-realgames">
+  <div class="page-banner banner-realgames">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">🎮</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">🎮</span><h2 class="pb-title">Real Fantasy Games</h2><p class="pb-sub">Top-rated titles for PC &amp; Mobile — click to download</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="rg-notice"><span class="rg-notice-icon">🌟</span><p>These are <strong>real fantasy games</strong> available now on PC and mobile. Click any platform button to visit the official download page.</p></div>
+    <div class="rg-list">
+      <article class="rg-card">
+        <div class="rg-thumb rg-genshin"><span class="rg-emo">🐉</span><span class="rg-plat-label">PC · Android · iOS</span></div>
+        <div class="rg-body">
+          <div class="rg-head"><div><h3 class="rg-title">Genshin Impact</h3><div class="rg-rating">★★★★★ <span class="rg-score">4.8</span></div></div><span class="rg-tag free">FREE</span></div>
+          <p class="rg-desc">An open-world action RPG set in the magical continent of Teyvat. Explore seven elemental nations, collect unique heroes, battle mythical creatures and uncover ancient cosmic mysteries. Gorgeous anime-fantasy visuals with regular free updates.</p>
+          <div class="rg-links">
+            <a class="rg-btn rg-pc" href="https://genshin.hoyoverse.com/" target="_blank" rel="noopener">🖥 PC</a>
+            <a class="rg-btn rg-android" href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact" target="_blank" rel="noopener">▶ Play Store</a>
+            <a class="rg-btn rg-ios" href="https://apps.apple.com/app/genshin-impact/id1517783697" target="_blank" rel="noopener"> App Store</a>
+          </div>
+        </div>
+      </article>
+      <article class="rg-card">
+        <div class="rg-thumb rg-elden"><span class="rg-emo">⚔️</span><span class="rg-plat-label">PC · PS5 · Xbox</span></div>
+        <div class="rg-body">
+          <div class="rg-head"><div><h3 class="rg-title">Elden Ring</h3><div class="rg-rating">★★★★★ <span class="rg-score">4.9</span></div></div><span class="rg-tag paid">PAID</span></div>
+          <p class="rg-desc">FromSoftware's masterpiece open-world dark fantasy RPG. Explore the vast Lands Between, face terrifying demigod bosses and uncover the lore of the shattered Elden Ring. One of the greatest video games ever created. DLC "Shadow of the Erdtree" available.</p>
+          <div class="rg-links">
+            <a class="rg-btn rg-pc" href="https://store.steampowered.com/app/1245620/ELDEN_RING/" target="_blank" rel="noopener">🖥 Steam</a>
+            <a class="rg-btn rg-pc" href="https://www.epicgames.com/store/en-US/p/elden-ring" target="_blank" rel="noopener">🎮 Epic Games</a>
+          </div>
+        </div>
+      </article>
+      <article class="rg-card">
+        <div class="rg-thumb rg-raid"><span class="rg-emo">🛡️</span><span class="rg-plat-label">PC · Android · iOS</span></div>
+        <div class="rg-body">
+          <div class="rg-head"><div><h3 class="rg-title">Raid: Shadow Legends</h3><div class="rg-rating">★★★★☆ <span class="rg-score">4.3</span></div></div><span class="rg-tag free">FREE</span></div>
+          <p class="rg-desc">Collect 700+ unique fantasy champions and build powerful teams in a dark fantasy world. Deep strategy RPG with stunning 3D visuals, epic clan wars, dungeons and massive boss raids.</p>
+          <div class="rg-links">
+            <a class="rg-btn rg-pc" href="https://plarium.com/en/landings/raid-shadow-legends/pc/" target="_blank" rel="noopener">🖥 PC</a>
+            <a class="rg-btn rg-android" href="https://play.google.com/store/apps/details?id=com.plarium.raidlegends" target="_blank" rel="noopener">▶ Play Store</a>
+            <a class="rg-btn rg-ios" href="https://apps.apple.com/app/raid-shadow-legends/id1343461147" target="_blank" rel="noopener"> App Store</a>
+          </div>
+        </div>
+      </article>
+      <article class="rg-card">
+        <div class="rg-thumb rg-blades"><span class="rg-emo">🌿</span><span class="rg-plat-label">Android · iOS</span></div>
+        <div class="rg-body">
+          <div class="rg-head"><div><h3 class="rg-title">The Elder Scrolls: Blades</h3><div class="rg-rating">★★★★☆ <span class="rg-score">4.1</span></div></div><span class="rg-tag free">FREE</span></div>
+          <p class="rg-desc">Bethesda's beloved Elder Scrolls universe on mobile. Build your town, explore procedurally generated dungeons and face legendary creatures in this award-winning first-person fantasy RPG.</p>
+          <div class="rg-links">
+            <a class="rg-btn rg-android" href="https://play.google.com/store/apps/details?id=com.bethsoft.elderscrollsblades" target="_blank" rel="noopener">▶ Play Store</a>
+            <a class="rg-btn rg-ios" href="https://apps.apple.com/app/the-elder-scrolls-blades/id1361143503" target="_blank" rel="noopener"> App Store</a>
+          </div>
+        </div>
+      </article>
+      <article class="rg-card">
+        <div class="rg-thumb rg-honkai"><span class="rg-emo">🔮</span><span class="rg-plat-label">PC · Android · iOS</span></div>
+        <div class="rg-body">
+          <div class="rg-head"><div><h3 class="rg-title">Honkai: Star Rail</h3><div class="rg-rating">★★★★★ <span class="rg-score">4.7</span></div></div><span class="rg-tag free">FREE</span></div>
+          <p class="rg-desc">A space fantasy turn-based RPG by HoYoverse. Board the interstellar Astral Express, journey across the cosmos, meet diverse civilisations and battle world-ending threats. Beautiful story-driven experience.</p>
+          <div class="rg-links">
+            <a class="rg-btn rg-pc" href="https://hsr.hoyoverse.com/" target="_blank" rel="noopener">🖥 PC</a>
+            <a class="rg-btn rg-android" href="https://play.google.com/store/apps/details?id=com.HoYoverse.hkrpgoversea" target="_blank" rel="noopener">▶ Play Store</a>
+            <a class="rg-btn rg-ios" href="https://apps.apple.com/app/honkai-star-rail/id1599719154" target="_blank" rel="noopener"> App Store</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="page" id="page-library">
+  <div class="page-banner banner-library">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">📖</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">📚</span><h2 class="pb-title">Library of Legends</h2><p class="pb-sub">Ancient tomes of wonder await your discovery</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="cards-grid book-grid">
+      <article class="book-card">
+        <div class="book-cover" style="--bc:#7c2dff"><div class="book-spine"></div><span class="book-emoji">📖</span><div class="book-cover-title">The Dragon Kingdom</div></div>
+        <div class="book-body"><h3>The Dragon Kingdom</h3><p class="book-author">by Aldric Thornwood</p><p class="book-desc">Chronicles of the ancient war between dragons and mortals that forged the known world. A sweeping epic spanning three ages.</p><div class="book-meta"><span class="bm-genre">🐉 Epic Fantasy</span><span class="bm-rating">★★★★★</span></div><button class="btn btn-gold btn-full" onclick="App.toast('📖','Opening The Dragon Kingdom…')">📜 Read Now</button></div>
+      </article>
+      <article class="book-card">
+        <div class="book-cover" style="--bc:#1a6aff"><div class="book-spine"></div><span class="book-emoji">🧙</span><div class="book-cover-title">Wizard Chronicles</div></div>
+        <div class="book-body"><h3>Wizard Chronicles</h3><p class="book-author">by Seraphel Moonsong</p><p class="book-desc">Follow Aldric the Grey across seven enchanted realms where magic bends the laws of reality itself. A legendary journey.</p><div class="book-meta"><span class="bm-genre">🔮 Arcane Lore</span><span class="bm-rating">★★★★☆</span></div><button class="btn btn-magic btn-full" onclick="App.toast('🧙','Opening Wizard Chronicles…')">📜 Read Now</button></div>
+      </article>
+      <article class="book-card">
+        <div class="book-cover" style="--bc:#0a7a30"><div class="book-spine"></div><span class="book-emoji">🌿</span><div class="book-cover-title">Forest of Spirits</div></div>
+        <div class="book-body"><h3>Forest of Spirits</h3><p class="book-author">by Lirien Dawnwhisper</p><p class="book-desc">A young druid discovers the whispering woods hold secrets older than the gods. A beautiful meditation on nature and power.</p><div class="book-meta"><span class="bm-genre">🌿 Nature Magic</span><span class="bm-rating">★★★★★</span></div><button class="btn btn-purple btn-full" onclick="App.toast('🌿','Opening Forest of Spirits…')">📜 Read Now</button></div>
+      </article>
+      <article class="book-card">
+        <div class="book-cover" style="--bc:#cc4400"><div class="book-spine"></div><span class="book-emoji">🔥</span><div class="book-cover-title">Tales of the Phoenix</div></div>
+        <div class="book-body"><h3>Tales of the Phoenix</h3><p class="book-author">by Kazan Emberflight</p><p class="book-desc">Myths of the immortal phoenix — reborn from ash to reshape the fate of dying kingdoms. A breathtaking collection of legends.</p><div class="book-meta"><span class="bm-genre">🔥 Mythology</span><span class="bm-rating">★★★★★</span></div><button class="btn btn-ember btn-full" onclick="App.toast('🔥','Opening Tales of the Phoenix…')">📜 Read Now</button></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- IDEAS -->
+<section class="page" id="page-ideas">
+  <div class="page-banner banner-ideas">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">✨</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">💡</span><h2 class="pb-title">The Creative Chamber</h2><p class="pb-sub">Share your visions — every legend begins with an idea</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="ideas-layout">
+      <div class="ideas-form-panel">
+        <div class="ifp-header"><span class="ifp-icon">✨</span><h3>Scribe Your Vision</h3><p>Describe your fantasy kingdom, creature, or hero</p></div>
+        <div class="form-group"><label for="ideaAuthor">⚔ Adventurer Name</label><input type="text" id="ideaAuthor" placeholder="e.g. Eldara the Swift" maxlength="40"/></div>
+        <div class="form-group"><label for="ideaCategory">📜 Category</label><select id="ideaCategory"><option value="Story Idea">📜 Story Idea</option><option value="Character Design">⚔ Character Design</option><option value="World Building">🌍 World Building</option><option value="Creature Concept">🐉 Creature Concept</option><option value="Magical Item">🔮 Magical Item</option></select></div>
+        <div class="form-group"><label for="ideaText">💬 Your Idea</label><textarea id="ideaText" rows="5" placeholder="Describe your fantasy kingdom or magical creature…" maxlength="500"></textarea><span class="char-count"><span id="ideaCharCount">0</span>/500</span></div>
+        <button class="btn btn-purple btn-full" onclick="App.postIdea()">⚜ Post to Guild Board</button>
+      </div>
+      <div class="ideas-board">
+        <div class="board-header"><span class="bh-title">📜 Guild Board</span><div class="bh-right"><span class="bh-count" id="ideaCount">3 ideas</span><select class="bh-sort" id="ideaSort" onchange="App.sortIdeas(this.value)"><option value="newest">Newest</option><option value="oldest">Oldest</option></select></div></div>
+        <div class="ideas-feed" id="ideasFeed">
+          <div class="idea-card"><div class="ic-header"><span class="ic-author">🗡 Theron Brightblade</span><span class="ic-rank">Guild Knight</span></div><p class="ic-text">"A kingdom suspended in the clouds, built on the back of a slumbering titan. Its citizens harvest lightning for power."</p><div class="ic-footer"><span class="ic-tag">🌍 World Building</span><button class="like-btn" onclick="App.likeIdea(this)">♡ 12</button></div></div>
+          <div class="idea-card"><div class="ic-header"><span class="ic-author">🌙 Seraphina Moonsong</span><span class="ic-rank">Beast Tamer</span></div><p class="ic-text">"A creature that feeds on forgotten memories — appearing as whoever you miss most, luring travellers from safe paths."</p><div class="ic-footer"><span class="ic-tag">🐉 Creature Concept</span><button class="like-btn" onclick="App.likeIdea(this)">♡ 27</button></div></div>
+          <div class="idea-card"><div class="ic-header"><span class="ic-author">⚡ Kazimir the Bold</span><span class="ic-rank">Dragon Master</span></div><p class="ic-text">"An ancient sword that speaks in riddles. It will only draw blood if the wielder can answer its question correctly."</p><div class="ic-footer"><span class="ic-tag">🔮 Magical Item</span><button class="like-btn" onclick="App.likeIdea(this)">♡ 41</button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SNACKS -->
+<section class="page" id="page-snacks">
+  <div class="page-banner banner-snacks">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">🍺</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">🍖</span><h2 class="pb-title">The Snack Tavern</h2><p class="pb-sub">"Eat, drink, and be merry — for tomorrow we quest!"</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="tavern-board"><span>🕯</span><span class="tb-text">Today's Specials — Brewed with Ancient Enchantment</span><span>🕯</span></div>
+    <div class="cart-bar" id="cartBar"><span>🛒</span><span id="cartCount">0 items</span><span id="cartTotal">0 Gold Coins</span><button class="btn btn-gold" onclick="App.checkout()">Checkout ⚜</button></div>
+    <div class="cards-grid snack-grid">
+      <article class="snack-card"><div class="snack-banner s-fire">🌶️</div><div class="snack-body"><h3>Dragon Fire Chips</h3><p>Enchanted crisps seared by true dragon breath. Not for the faint-hearted — guaranteed to breathe smoke for an hour.</p><div class="snack-row"><span class="snack-price">🪙 3 Gold</span><span class="snack-heat">🌶🌶🌶🌶🌶</span></div><button class="btn btn-ember btn-full" onclick="App.addToCart('Dragon Fire Chips',3)">🛒 Add to Pouch</button></div></article>
+      <article class="snack-card"><div class="snack-banner s-forest">🫐</div><div class="snack-body"><h3>Elf Berry Juice</h3><p>Pressed from enchanted forest berries. Restores 40 mana per sip. Leaves a sparkly green glow on lips.</p><div class="snack-row"><span class="snack-price">🪙 2 Gold</span><span class="snack-heat">🌿🌿🌿</span></div><button class="btn btn-magic btn-full" onclick="App.addToCart('Elf Berry Juice',2)">🛒 Add to Pouch</button></div></article>
+      <article class="snack-card"><div class="snack-banner s-arcane">⭐</div><div class="snack-body"><h3>Wizard Popcorn</h3><p>Each kernel is magically flavoured differently. A mystery in every mouthful. Conjured fresh daily by Merlin himself.</p><div class="snack-row"><span class="snack-price">🪙 2 Gold</span><span class="snack-heat">🔮🔮🔮🔮</span></div><button class="btn btn-purple btn-full" onclick="App.addToCart('Wizard Popcorn',2)">🛒 Add to Pouch</button></div></article>
+      <article class="snack-card"><div class="snack-banner s-phoenix">🔥</div><div class="snack-body"><h3>Phoenix Wings</h3><p>Legendary wings marinated in sacred phoenix sauce. Grants courage for one full battle. Chef's signature dish.</p><div class="snack-row"><span class="snack-price">🪙 5 Gold</span><span class="snack-heat">🔥🔥🔥🔥🔥</span></div><button class="btn btn-gold btn-full" onclick="App.addToCart('Phoenix Wings',5)">🛒 Add to Pouch</button></div></article>
+      <article class="snack-card"><div class="snack-banner s-frost">❄️</div><div class="snack-body"><h3>Frost Dragon Sorbet</h3><p>Ice-cold sorbet made from glacial dragon breath. Enchanted to stay frozen indefinitely. Mint-crystal flavour.</p><div class="snack-row"><span class="snack-price">🪙 4 Gold</span><span class="snack-heat">❄❄❄</span></div><button class="btn btn-magic btn-full" onclick="App.addToCart('Frost Dragon Sorbet',4)">🛒 Add to Pouch</button></div></article>
+      <article class="snack-card"><div class="snack-banner s-mead">🍯</div><div class="snack-body"><h3>Enchanted Honey Mead</h3><p>Brewed from golden bees of the Elven forests. One sip raises your confidence by +10 for the whole evening.</p><div class="snack-row"><span class="snack-price">🪙 3 Gold</span><span class="snack-heat">🍯🍯🍯🍯</span></div><button class="btn btn-gold btn-full" onclick="App.addToCart('Enchanted Honey Mead',3)">🛒 Add to Pouch</button></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- BEAST CLUB -->
+<section class="page" id="page-beasts">
+  <div class="page-banner banner-beasts">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">🐉</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">🐾</span><h2 class="pb-title">Fantasy Beast Club</h2><p class="pb-sub">Choose your clan — receive your official ID card</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="clan-grid">
+      <article class="clan-card clan-dragon">
+        <div class="clan-aura"></div>
+        <div class="clan-orbits"><span class="clan-orb co1">🔥</span><span class="clan-orb co2">⚔️</span><span class="clan-orb co3">💎</span></div>
+        <span class="clan-beast">🐉</span><h3 class="clan-name">Dragon Clan</h3>
+        <p class="clan-desc">For brave warriors who seek power and courage. Masters of fire and ancient wisdom. Fear nothing — conquer everything.</p>
+        <div class="clan-stats"><div class="cs-bar"><span class="cs-lbl">Power</span><div class="cs-track"><div class="cs-fill" style="width:100%;background:var(--ember)"></div></div></div><div class="cs-bar"><span class="cs-lbl">Magic</span><div class="cs-track"><div class="cs-fill" style="width:60%;background:var(--ember)"></div></div></div></div>
+        <div class="clan-count">🔥 4,821 Warriors</div>
+        <button class="btn btn-ember btn-full" onclick="App.openClanModal('Dragon','🐉','#ff6b35','rgba(255,107,53,.3)')">🐉 Join &amp; Get ID Card</button>
+      </article>
+      <article class="clan-card clan-unicorn">
+        <div class="clan-aura"></div>
+        <div class="clan-orbits"><span class="clan-orb co1">✨</span><span class="clan-orb co2">🌟</span><span class="clan-orb co3">💫</span></div>
+        <span class="clan-beast">🦄</span><h3 class="clan-name">Unicorn Clan</h3>
+        <p class="clan-desc">Guardians of magic and purity. Healers and enchanters who bring radiant light to the darkest corners of the realm.</p>
+        <div class="clan-stats"><div class="cs-bar"><span class="cs-lbl">Magic</span><div class="cs-track"><div class="cs-fill" style="width:100%;background:#cc44cc"></div></div></div><div class="cs-bar"><span class="cs-lbl">Healing</span><div class="cs-track"><div class="cs-fill" style="width:95%;background:#cc44cc"></div></div></div></div>
+        <div class="clan-count">✨ 3,210 Enchanters</div>
+        <button class="btn btn-purple btn-full" onclick="App.openClanModal('Unicorn','🦄','#cc44cc','rgba(204,68,204,.3)')">🦄 Join &amp; Get ID Card</button>
+      </article>
+      <article class="clan-card clan-wolf">
+        <div class="clan-aura"></div>
+        <div class="clan-orbits"><span class="clan-orb co1">🌙</span><span class="clan-orb co2">❄️</span><span class="clan-orb co3">🐾</span></div>
+        <span class="clan-beast">🐺</span><h3 class="clan-name">Wolf Clan</h3>
+        <p class="clan-desc">Swift hunters who roam the frozen tundra under moonlight. Loyal to the pack above all else — never alone in battle.</p>
+        <div class="clan-stats"><div class="cs-bar"><span class="cs-lbl">Speed</span><div class="cs-track"><div class="cs-fill" style="width:100%;background:var(--blue)"></div></div></div><div class="cs-bar"><span class="cs-lbl">Loyalty</span><div class="cs-track"><div class="cs-fill" style="width:100%;background:var(--blue)"></div></div></div></div>
+        <div class="clan-count">🌙 2,944 Hunters</div>
+        <button class="btn btn-magic btn-full" onclick="App.openClanModal('Wolf','🐺','#4a9eff','rgba(74,158,255,.3)')">🐺 Join &amp; Get ID Card</button>
+      </article>
+      <article class="clan-card clan-griffin">
+        <div class="clan-aura"></div>
+        <div class="clan-orbits"><span class="clan-orb co1">👑</span><span class="clan-orb co2">🌟</span><span class="clan-orb co3">🏅</span></div>
+        <span class="clan-beast">🦅</span><h3 class="clan-name">Griffin Clan</h3>
+        <p class="clan-desc">Noble sentinels who soar above kingdoms. Guardians of ancient treasure and keepers of the eternal code of honour.</p>
+        <div class="clan-stats"><div class="cs-bar"><span class="cs-lbl">Nobility</span><div class="cs-track"><div class="cs-fill" style="width:100%;background:var(--gold)"></div></div></div><div class="cs-bar"><span class="cs-lbl">Flight</span><div class="cs-track"><div class="cs-fill" style="width:90%;background:var(--gold)"></div></div></div></div>
+        <div class="clan-count">👑 1,505 Sentinels</div>
+        <button class="btn btn-gold btn-full" onclick="App.openClanModal('Griffin','🦅','#c9a227','rgba(201,162,39,.3)')">🦅 Join &amp; Get ID Card</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="page" id="page-membership">
+  <div class="page-banner banner-membership">
+    <div class="pb-overlay"></div><div class="pb-bg-rune">⚜</div>
+    <div class="pb-content">
+      <button class="back-btn" onclick="App.go('home')">← Back</button>
+      <span class="pb-icon">⚜</span><h2 class="pb-title">Join the Guild</h2><p class="pb-sub">Your adventure begins with a single oath</p>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="mem-layout">
+      <div class="mem-form-card">
+        <div class="mf-header"><div class="mf-emblem">⚜</div><h3>Guild Registration</h3><p>Fill the sacred scroll to claim your place among legends</p></div>
+        <div class="form-group"><label for="regUser">⚔ Adventurer Username</label><input type="text" id="regUser" placeholder="e.g. ShadowBlade99" maxlength="30"/></div>
+        <div class="form-group"><label for="regEmail">📮 Raven Post (Email)</label><input type="email" id="regEmail" placeholder="your@email.com"/></div>
+        <div class="form-group"><label for="regCreature">🐉 Favourite Fantasy Creature</label><input type="text" id="regCreature" placeholder="e.g. Frost Dragon" maxlength="40"/></div>
+        <div class="form-group"><label for="regClan">⚜ Choose Your Beast Clan</label><select id="regClan"><option value="">— Select a Clan —</option><option value="Dragon">🐉 Dragon Clan</option><option value="Unicorn">🦄 Unicorn Clan</option><option value="Wolf">🐺 Wolf Clan</option><option value="Griffin">🦅 Griffin Clan</option></select></div>
+        <div class="form-group pass-group"><label for="regPass">🔒 Secret Passphrase</label><div class="pass-wrap"><input type="password" id="regPass" placeholder="At least 8 characters"/><button class="pass-toggle" onclick="App.togglePass()">👁</button></div><div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div><span class="strength-label" id="strengthLabel"></span></div>
+        <button class="btn btn-gold btn-xl btn-full" onclick="App.registerGuild()">⚜ Join the Guild</button>
+      </div>
+      <div class="mem-info-panel">
+        <h4 class="ranks-heading">⚔ Guild Ranks</h4>
+        <div class="rank-list">
+          <div class="rank-row"><div class="rank-ico">🛡</div><div class="rank-info"><span class="rank-name">Adventurer</span><span class="rank-desc">Beginner — the first step on the path to glory</span></div><span class="rank-lv">Rank I</span></div>
+          <div class="rank-row"><div class="rank-ico">🐾</div><div class="rank-info"><span class="rank-name">Beast Tamer</span><span class="rank-desc">You have bonded with your clan beast</span></div><span class="rank-lv">Rank II</span></div>
+          <div class="rank-row"><div class="rank-ico">⚔</div><div class="rank-info"><span class="rank-name">Guild Knight</span><span class="rank-desc">Defender of the Fantasy Feast realm</span></div><span class="rank-lv">Rank III</span></div>
+          <div class="rank-row rank-legend"><div class="rank-ico">🐉</div><div class="rank-info"><span class="rank-name">Dragon Master</span><span class="rank-desc">Legendary — master of the guild's deepest secrets</span></div><span class="rank-lv legend-lv">Rank IV</span></div>
+        </div>
+        <div class="perks-card"><h5>⚜ Guild Perks</h5><ul class="perks-list"><li>✅ Access all Adventure Zones</li><li>✅ Exclusive Beast Clan Community</li><li>✅ Weekly Lore Drops &amp; Stories</li><li>✅ Custom Fantasy Guild Badge</li><li>✅ Monthly Tavern Rewards</li><li>✅ Early Access to New Games</li><li>✅ Official Clan ID Card</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- CLAN ID MODAL -->
+<div class="modal-backdrop" id="clanModalBg">
+  <div class="modal-box" id="clanModalBox">
+    <button class="modal-close" onclick="App.closeClanModal()">✕</button>
+    <div class="modal-step" id="modalStep1">
+      <h3 class="modal-title" id="modalHeading">Join the Clan</h3>
+      <p class="modal-sub">Enter your name to receive your official Fantasy Beast Club ID</p>
+      <div class="form-group"><label for="clanNameInput">⚔ Your Adventurer Name</label><input type="text" id="clanNameInput" placeholder="Enter your name…" maxlength="28"/></div>
+      <button class="btn btn-gold btn-full" onclick="App.generateClanId()">⚜ Generate My Clan ID</button>
+    </div>
+    <div class="modal-step hidden" id="modalStep2">
+      <div id="clanIdCard"></div>
+      <div class="id-actions">
+        <button class="btn btn-magic btn-full" onclick="App.printClanId()" style="margin-bottom:.6rem">🖨 Print / Save ID</button>
+        <button class="btn btn-gold btn-full" onclick="App.closeClanModal()">✓ Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="siteFooter">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand"><span class="footer-logo">🐉 Fantasy Feast</span><p>Fantasy Feast Guild — Where Legends Begin.</p><p>A magical gathering place for gamers, readers, and creators who dare to imagine worlds beyond the horizon.</p></div>
+      <div class="footer-nav-col"><h4>Explore</h4><ul><li><button onclick="App.go('games')">⚔️ Adventure Zone</button></li><li><button onclick="App.go('realgames')">🎮 Real Games</button></li><li><button onclick="App.go('library')">📚 Library</button></li><li><button onclick="App.go('ideas')">💡 Ideas Chamber</button></li><li><button onclick="App.go('snacks')">🍖 Snack Tavern</button></li></ul></div>
+      <div class="footer-nav-col"><h4>Guild</h4><ul><li><button onclick="App.go('membership')">⚜ Join the Guild</button></li><li><button onclick="App.go('beasts')">🐾 Beast Clans</button></li><li><button onclick="App.toast('📜','Coming soon!')">📜 Guild Charter</button></li><li><button onclick="App.toast('🏆','Coming soon!')">🏆 Leaderboard</button></li></ul></div>
+      <div class="footer-contact-col"><h4>Connect</h4><p>📮 ravens@fantasyfeast.guild</p><p>🏰 The Enchanted Realm</p><div class="footer-socials"><a class="social-btn" href="https://discord.com" target="_blank" rel="noopener" title="Discord">💬</a><a class="social-btn" href="https://x.com/search?q=fantasy+games" target="_blank" rel="noopener" title="X/Twitter">𝕏</a><a class="social-btn" href="https://reddit.com/r/fantasy" target="_blank" rel="noopener" title="Reddit">🛡</a><a class="social-btn" href="https://youtube.com" target="_blank" rel="noopener" title="YouTube">📺</a><a class="social-btn" href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">✨</a></div></div>
+    </div>
+    <div class="footer-bottom"><p class="footer-motto">⚜ Fantasy Feast Guild — Where Legends Begin ⚜</p><p class="footer-copy">© 2025 Fantasy Feast · All Rights Reserved · Forged in Magic</p></div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
